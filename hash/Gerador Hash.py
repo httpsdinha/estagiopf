@@ -26,7 +26,7 @@ def copiar_hash():
     janela.clipboard_clear()
     janela.clipboard_append(entry_hash.get())
     janela.update() 
-    print("Hash copiada para a área de transferência!")
+    janela.print("Hash copiada para a área de transferência!")
 
 #Organização da Tela
 janela = tk.Tk()
