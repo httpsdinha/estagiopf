@@ -4,7 +4,7 @@ import re
 
 #characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:'\",.<>?/"
 characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()_-+=?"
-
+tamanho_digitos = (int(input("Digite o tamanho dos dígitos: ")))
 max_file_size_mb = int(input("Digite o tamanho máximo do arquivo em MB: "))
 max_file_size_kb = max_file_size_mb * 1024  # Convertendo MB para KB
 max_file_size = max_file_size_kb * 1024  # Convertendo KB para bytes
@@ -20,7 +20,7 @@ def sanitize_filename(filename):
     return re.sub(r'[<>:"/\|?*]', 'â', filename)
 
 # Gerar todas as combinações possíveis de 5 caracteres
-combinations = itertools.product(characters, repeat=5)
+combinations = itertools.product(characters, repeat=tamanho_digitos)
 
 for combination in combinations:
     combination_str = ''.join(combination) + "\n"
