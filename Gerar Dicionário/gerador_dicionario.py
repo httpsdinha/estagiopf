@@ -3,7 +3,8 @@ import os
 import re
 
 #characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:'\",.<>?/"
-characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()_-+=?"
+characters_padrao = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()_-+=?"
+characters = input("Digite os caracteres a serem usados: ") or characters_padrao
 tamanho_digitos = (int(input("Digite o tamanho dos dígitos: ")))
 max_file_size_mb = int(input("Digite o tamanho máximo do arquivo em MB: "))
 max_file_size_kb = max_file_size_mb * 1024  # Convertendo MB para KB
@@ -19,7 +20,7 @@ def sanitize_filename(filename):
     # Remove caracteres inválidos para nomes de arquivos
     return re.sub(r'[<>:"/\|?*]', 'â', filename)
 
-# Gerar todas as combinações possíveis de 5 caracteres
+# Gerar todas as combinações possíveis de X caracteres
 combinations = itertools.product(characters, repeat=tamanho_digitos)
 
 for combination in combinations:
