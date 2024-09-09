@@ -2,7 +2,7 @@ import itertools
 import os
 import re
 import tkinter as tk
-from tkinter import filedialog, messagebox, StringVar, OptionMenu  
+from tkinter import filedialog, messagebox, StringVar, OptionMenu, Spinbox
 
 def sanitize_filename(filename):
     # Remove caracteres inválidos para nomes de arquivos
@@ -151,8 +151,9 @@ digits_entry = tk.Entry(root)
 digits_entry.pack()
 
 tk.Label(root, text="Tamanho máximo do arquivo em MB:").pack()
-file_size_entry = tk.Entry(root)
-file_size_entry.pack()
+file_size_var = StringVar(value='250')
+file_size_spinbox = Spinbox(root, from_=1, to=1000, textvariable=file_size_var, increment=1, width=5)
+file_size_spinbox.pack()
 
 tk.Label(root, text="Escolha o filtro:").pack()
 filter_var = StringVar(value='Nenhum filtro')
