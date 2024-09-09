@@ -5,8 +5,9 @@ import re
 #characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:'\",.<>?/"
 characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()_-+=?"
 
-max_file_size_kb = 10000  #Tamanho em KB de cada arquivo
-max_file_size = max_file_size_kb * 1024  # Convertendo para bytes
+max_file_size_mb = int(input("Digite o tamanho máximo do arquivo em MB: "))
+max_file_size_kb = max_file_size_mb * 1024  # Convertendo MB para KB
+max_file_size = max_file_size_kb * 1024  # Convertendo KB para bytes
 file_index = 0
 file_count = 1
 current_file_name = f"arquivo_{file_index}.txt"
