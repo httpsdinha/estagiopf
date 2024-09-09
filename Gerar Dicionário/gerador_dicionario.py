@@ -2,14 +2,37 @@ import itertools
 import os
 import re
 
-# Definindo os caracteres a serem usados
+# Definindo variaveis dos caracteres pre definidos
 characters_numbers = "0123456789"
 characters_uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 characters_lowercase = "abcdefghijklmnopqrstuvwxyz"
 characters_especiais = "@#*_-"
 characters_padrao = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*()_-+=?"
-characters = input("Digite os caracteres a serem usados: ") or characters_padrao
 
+print("1. Padrão: ", characters_padrao)
+print("2. Números: ", characters_numbers)
+print("3. Letras maiúsculas: ", characters_uppercase)
+print("4. Letras minúsculas: ", characters_lowercase)
+print("5. Caracteres especiais: ", characters_especiais)
+print("6. Personalizado")
+
+characters = input("Digite os caracteres a serem usados: ")
+if characters == '1':
+    characters = characters_padrao
+elif characters == '2':
+    characters = characters_numbers
+elif characters == '3':
+    characters = characters_uppercase
+elif characters == '4':
+    characters = characters_lowercase
+elif characters == '5':
+    characters = characters_especiais
+elif characters =='6':
+    characters = input("Digite os caracteres a serem usados: ")
+else:
+    print("Opção inválida.")
+    characters = characters_padrao
+    
 # Definindo o tamanho dos dígitos e o tamanho máximo do arquivo
 tamanho_digitos = (int(input("Digite o tamanho dos dígitos: ")))
 max_file_size_mb = int(input("Digite o tamanho máximo do arquivo em MB: "))
@@ -90,12 +113,13 @@ for combination_str in generate_combinations(characters,tamanho_digitos, filter_
     combination_size = len(combination_str.encode('utf-8'))  # Tamanho da combinação em bytes
     
     if current_file_size == 0:
+        first_combination = sanitize_filename(combination_str.strip())  # Armazena a primeira combinação
         first_combination = combination_str.strip()  # Armazena a primeira combinação
 
     if current_file_size + combination_size > max_file_size:
         # Renomeia o arquivo com base na primeira e última combinação
         current_file.close()
-        last_combination = combination_str.strip()
+        last_combination = sanitize_filename(combination_str.strip())  # Última combinação
         new_file_name = f"{first_combination}_{last_combination}.txt"
         new_file_name = sanitize_filename(new_file_name)
         os.rename(current_file_name, new_file_name)
@@ -117,6 +141,7 @@ current_file.close()
 if current_file_size > 0:
     last_combination = combination_str.strip()
     new_file_name = f"{first_combination}_{last_combination}.txt"
+    new_file_name = sanitize_filename(new_file_name)
     os.rename(current_file_name, new_file_name)
 
 print(f"Combinações geradas e distribuídas entre {file_count} arquivos, renomeados com o primeiro e último dígito de cada.")
